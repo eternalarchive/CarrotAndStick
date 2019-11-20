@@ -13290,11 +13290,6 @@ __webpack_require__.r(__webpack_exports__);
  // eslint-disable-next-line import/no-cycle
 
 
-var $countUp = document.querySelector('.counter'); // counterUp(el, {
-//   duration: 1000,
-//   delay: 16
-// });
-
 /* eslint-disable import/no-mutable-exports */
 
 var Typed = __webpack_require__(/*! typed.js */ "./node_modules/typed.js/lib/typed.js");
@@ -13322,6 +13317,7 @@ var $countNowNumber = document.querySelector('.count-now-number');
 var $countGoalNumber = document.querySelector('.count-goal-number');
 var $refresh = document.querySelector('.refresh');
 var $commitTime = document.querySelector('.commit-time');
+var $countUp = document.querySelector('.counter');
 
 var changeFace = function changeFace() {
   // 표정 관련
@@ -13419,7 +13415,7 @@ var saveForcommit = function saveForcommit() {
 var getEvent = function getEvent() {
   var todayCommitCount = 0;
   var date = '';
-  $commitTime.innerHTML = "".concat(new Date().getHours(), "\uC2DC ").concat(new Date().getMonth(), "\uBD84");
+  $commitTime.innerHTML = "".concat(new Date().getHours(), "\uC2DC ").concat(new Date().getMinutes(), "\uBD84");
   gitEvent.forEach(function (eventList) {
     date = new Date(eventList.created_at).toDateString();
     if (date !== new Date().toDateString()) return;
@@ -13443,20 +13439,24 @@ var getGitHubCommit = function getGitHubCommit() {
           res = _context.sent;
           gitEvent = res.data;
           $countNowNumber.textContent = getEvent();
-          _context.next = 11;
+          counterup2__WEBPACK_IMPORTED_MODULE_0___default()($countNowNumber, {
+            duration: 1000,
+            delay: 16
+          });
+          _context.next = 12;
           break;
 
-        case 8:
-          _context.prev = 8;
+        case 9:
+          _context.prev = 9;
           _context.t0 = _context["catch"](0);
           console.log(_context.t0);
 
-        case 11:
+        case 12:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 8]]);
+  }, null, null, [[0, 9]]);
 }; // Events
 
 
@@ -13486,6 +13486,10 @@ $inputGithub.onkeyup = function (_ref) {
 $btnOk.onclick = function () {
   saveForcommit();
   Object(_todoList__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  counterup2__WEBPACK_IMPORTED_MODULE_0___default()($countUp, {
+    duration: 1000,
+    delay: 16
+  });
 };
 
 $inputCommit.onkeyup = function (_ref2) {

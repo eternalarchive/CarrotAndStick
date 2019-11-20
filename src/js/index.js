@@ -2,8 +2,6 @@ import counterUp from 'counterup2';
 // eslint-disable-next-line import/no-cycle
 import getTodos from './todoList';
 
-const $countUp = document.querySelector('.counter');
-
 /* eslint-disable import/no-mutable-exports */
 const Typed = require('typed.js');
 const axios = require('axios');
@@ -31,6 +29,7 @@ const $countNowNumber = document.querySelector('.count-now-number');
 const $countGoalNumber = document.querySelector('.count-goal-number');
 const $refresh = document.querySelector('.refresh');
 const $commitTime = document.querySelector('.commit-time');
+const $countUp = document.querySelector('.counter');
 
 const changeFace = () => {
   // 표정 관련
@@ -128,7 +127,7 @@ const getEvent = () => {
   let todayCommitCount = 0;
   let date = '';
 
-  $commitTime.innerHTML = `${new Date().getHours()}시 ${new Date().getMonth()}분`;
+  $commitTime.innerHTML = `${new Date().getHours()}시 ${new Date().getMinutes()}분`;
 
   gitEvent.forEach(eventList => {
     date = new Date(eventList.created_at).toDateString();
@@ -144,6 +143,10 @@ const getGitHubCommit = async () => {
     const res = await axios.get(`https://api.github.com/users/${userName}/events`);
     gitEvent = res.data;
     $countNowNumber.textContent = getEvent();
+    counterUp($countNowNumber, {
+      duration: 1000,
+      delay: 16
+    });
   } catch (error) {
     console.log(error);
   }
@@ -167,10 +170,6 @@ $inputGithub.onkeyup = ({ keyCode }) => {
     userName = $inputGithub.value;
     getGitHubCommit();
     openPopup();
-    counterUp($countUp, {
-      duration: 1000,
-      delay: 16
-    });
   }
   $inputGithub.value = '';
 };
@@ -178,6 +177,10 @@ $inputGithub.onkeyup = ({ keyCode }) => {
 $btnOk.onclick = () => {
   saveForcommit();
   getTodos();
+  counterUp($countUp, {
+    duration: 1000,
+    delay: 16
+  });
 };
 
 $inputCommit.onkeyup = ({ keyCode }) => {
