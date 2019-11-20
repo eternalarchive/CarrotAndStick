@@ -13575,11 +13575,9 @@ var render = function render() {
     var html = '';
 
     var _todos = todos.filter(function (todo) {
-      return navId === 'all' ? true : navId === 'active' ? !todo.completed : todo.completed;
-    });
-
-    _todos = _todos.filter(function (todo) {
       return todo.nickName === _index__WEBPACK_IMPORTED_MODULE_0__["userName"];
+    }).filter(function (todo) {
+      return navId === 'all' ? true : navId === 'active' ? !todo.completed : todo.completed;
     });
 
     _todos.forEach(function (_ref) {
@@ -13589,10 +13587,14 @@ var render = function render() {
       html += "\n      <li id=\"".concat(id, "\" class=\"todo-item\">\n        <input class=\"checkbox\" type=\"checkbox\" id=\"ck-").concat(id, "\" ").concat(completed ? 'checked' : '', ">\n        <label for=\"ck-").concat(id, "\">").concat(content, "</label>\n        <i class=\"remove-todo far fa-trash-alt\"></i>\n      </li>");
     });
 
-    $completedTodos.textContent = _todos.filter(function (todo) {
+    $completedTodos.textContent = todos.filter(function (todo) {
+      return todo.nickName === _index__WEBPACK_IMPORTED_MODULE_0__["userName"];
+    }).filter(function (todo) {
       return todo.completed;
     }).length;
-    $activeTodos.textContent = _todos.filter(function (todo) {
+    $activeTodos.textContent = todos.filter(function (todo) {
+      return todo.nickName === _index__WEBPACK_IMPORTED_MODULE_0__["userName"];
+    }).filter(function (todo) {
       return !todo.completed;
     }).length;
     $todos.innerHTML = html;

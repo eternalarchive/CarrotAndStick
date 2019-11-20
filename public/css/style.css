@@ -11,7 +11,8 @@ body {
   font-weight: 200;
   background-color: #eba33f;
   position: relative;
-  background-position-y: -200px; }
+  background-position-y: -200px;
+  background-image: url(../images/moominbg.jpg); }
 
 ul {
   padding-left: 0; }
@@ -270,14 +271,16 @@ input[type='checkbox'] {
   -o-appearance: none;
   appearance: none;
   outline: none;
-  box-shadow: none; }
+  box-shadow: none;
+  background-image: url(../images/uncheck.png); }
 
 input[type='checkbox']:checked {
   -webkit-appearance: none;
   -moz-appearance: none;
   -o-appearance: none;
   appearance: none;
-  box-shadow: none; }
+  box-shadow: none;
+  background-image: url(../images/checked.png); }
 
 .btn {
   display: inline-block;

@@ -24,10 +24,10 @@ const render = () => {
   } else {
     let html = '';
 
-    let _todos = todos.filter(todo => (
-      navId === 'all' ? true : navId === 'active' ? !todo.completed : todo.completed
-    ));
-    _todos = _todos.filter(todo => todo.nickName === userName);
+    const _todos = todos.filter(todo => todo.nickName === userName)
+      .filter(todo => (
+        navId === 'all' ? true : navId === 'active' ? !todo.completed : todo.completed
+      ));
 
     _todos.forEach(({ id, content, completed }) => {
       html += `
@@ -37,8 +37,11 @@ const render = () => {
         <i class="remove-todo far fa-trash-alt"></i>
       </li>`;
     });
-    $completedTodos.textContent = _todos.filter(todo => todo.completed).length;
-    $activeTodos.textContent = _todos.filter(todo => !todo.completed).length;
+
+    $completedTodos.textContent = todos.filter(todo => todo.nickName === userName)
+      .filter(todo => todo.completed).length;
+    $activeTodos.textContent = todos.filter(todo => todo.nickName === userName)
+      .filter(todo => !todo.completed).length;
     $todos.innerHTML = html;
 
     $scrollIcon.style.display = $todos.children.length > 5 ? 'block' : 'none';
