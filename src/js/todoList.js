@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { userName } from './index';
 
 const axios = require('axios');
