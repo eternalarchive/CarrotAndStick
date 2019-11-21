@@ -13820,6 +13820,16 @@ var changeNav = function changeNav(li) {
 
 var scrollIconStop = function scrollIconStop(scrollY) {
   $scrollIcon.style.display = scrollY >= ($todos.children.length - 5) * 49 ? 'none' : 'block';
+};
+
+var warningText = function warningText() {
+  var $emptyMent = document.querySelector('.empty-ment');
+  $emptyMent.classList.add('warning-text');
+  $todos.style.overflow = 'hidden';
+  setTimeout(function () {
+    $emptyMent.classList.remove('warning-text');
+    $todos.style.overflow = null;
+  }, 3002);
 }; // 이벤트
 
 
@@ -13831,7 +13841,10 @@ $inputTodo.onkeyup = function (_ref2) {
   var target = _ref2.target,
       keyCode = _ref2.keyCode;
   if (keyCode !== 13 || target.value.trim() === '') return;
-  addTodos();
+
+  if (!_index__WEBPACK_IMPORTED_MODULE_0__["userName"]) {
+    warningText();
+  } else addTodos();
 };
 
 $todos.onclick = function (_ref3) {

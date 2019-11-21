@@ -135,6 +135,16 @@ const scrollIconStop = scrollY => {
   $scrollIcon.style.display = scrollY >= ($todos.children.length - 5) * 49 ? 'none' : 'block';
 };
 
+const warningText = () => {
+  const $emptyMent = document.querySelector('.empty-ment');
+  $emptyMent.classList.add('warning-text');
+  $todos.style.overflow = 'hidden';
+  setTimeout(function () {
+    $emptyMent.classList.remove('warning-text');
+    $todos.style.overflow = null;
+  }, 3002);
+};
+
 // 이벤트
 window.onload = () => {
   getTodos();
@@ -142,7 +152,9 @@ window.onload = () => {
 
 $inputTodo.onkeyup = ({ target, keyCode }) => {
   if (keyCode !== 13 || target.value.trim() === '') return;
-  addTodos();
+  if (!userName) {
+    warningText();
+  } else addTodos();
 };
 
 $todos.onclick = ({ target }) => {

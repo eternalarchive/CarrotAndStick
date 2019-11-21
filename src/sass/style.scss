@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import url('https://use.fontawesome.com/releases/v5.5.0/css/all.css');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
 
 *, *::before, *::after{
   box-sizing: border-box;
@@ -207,6 +208,7 @@ li{
   text-align: right;
   margin-top: 20px;
   color: #313131;
+  font-family: 'Source Code Pro', monospace;
 }
 
 .count-goal-number::before{
@@ -847,5 +849,24 @@ input[type='checkbox']:checked{
     opacity: 10;
     fill: rgb(9, 105, 223);
     stroke-dashoffset: 0;
+  }
+}
+.warning-text {
+  overflow: hidden;
+  animation: warningMent 3s;
+}
+
+@keyframes warningMent {
+  0% {
+    transform: scale(1.2);
+    color: #313131;
+  }
+  33% {
+    transform: scale(1.7);
+    color: red;
+  }
+  100% {
+    transform: scale(1.2);
+    color: #313131;
   }
 }
