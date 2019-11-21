@@ -154,16 +154,14 @@ const getGitHubCommit = async () => {
 
 // Events
 $inputGithub.onkeyup = ({ keyCode }) => {
-  const regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=_-])(?=.*[0-9]).{6,16}$/;
+  const regexp = /^([A-Za-z0-9-]){4,39}$/;
+  console.log($inputGithub.value === '');
+  console.log(!regexp.test($inputGithub.value));
 
   if (keyCode !== 13) return;
-  if ($inputGithub.value === '') {
+  if ($inputGithub.value === '' || !regexp.test($inputGithub.value)) {
     $inputGithub.classList.add('input-github-error');
-    $inputGithub.placeholder = 'Please enter your Nickname.';
-  } else if (regExp.test($inputCommit.value)) {
-    $inputGithub.classList.add('input-github-error');
-    $inputGithub.placeholder = 'This is not a valid Nickname.';
-    $inputGithub.value = '';
+    $inputGithub.placeholder = 'Please enter your Nickname. (using only 4-39 characters in English or -)';
   } else {
     $inputGithub.classList.add('input-github-sucess');
     $inputGithub.placeholder = 'Thank you for using.';
