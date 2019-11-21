@@ -13423,57 +13423,78 @@ var getEvent = function getEvent() {
   });
   return todayCommitCount;
 }; // git API 불러오기.
-// const getGitHubCommit = async () => {
-//   try {
-//     const res = await axios.get(`https://api.github.com/users/${userName}/events`);
-//     gitEvent = res.data;
-//     $countNowNumber.textContent = getEvent();
-//     counterUp($countNowNumber, {
-//       duration: 1000,
-//       delay: 16
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-// Events``
+
+
+var getGitHubCommit = function getGitHubCommit() {
+  var res;
+  return regeneratorRuntime.async(function getGitHubCommit$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return regeneratorRuntime.awrap(axios.get("https://api.github.com/users/".concat(userName, "/events")));
+
+        case 3:
+          res = _context.sent;
+          gitEvent = res.data;
+          $countNowNumber.textContent = getEvent();
+          counterup2__WEBPACK_IMPORTED_MODULE_0___default()($countNowNumber, {
+            duration: 1000,
+            delay: 16
+          });
+          _context.next = 12;
+          break;
+
+        case 9:
+          _context.prev = 9;
+          _context.t0 = _context["catch"](0);
+          console.log(_context.t0);
+
+        case 12:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[0, 9]]);
+}; // Events``
 
 
 $inputGithub.onkeyup = function _callee(_ref) {
   var keyCode, regexp, res;
-  return regeneratorRuntime.async(function _callee$(_context) {
+  return regeneratorRuntime.async(function _callee$(_context2) {
     while (1) {
-      switch (_context.prev = _context.next) {
+      switch (_context2.prev = _context2.next) {
         case 0:
           keyCode = _ref.keyCode;
           regexp = /^([A-Za-z0-9-]){4,39}$/;
 
           if (!(keyCode !== 13)) {
-            _context.next = 4;
+            _context2.next = 4;
             break;
           }
 
-          return _context.abrupt("return");
+          return _context2.abrupt("return");
 
         case 4:
           if (!($inputGithub.value === '' || !regexp.test($inputGithub.value))) {
-            _context.next = 9;
+            _context2.next = 9;
             break;
           }
 
           $inputGithub.classList.add('input-github-error');
           $inputGithub.placeholder = 'Please enter your Nickname. (using only 4-39 characters in English or -)';
-          _context.next = 27;
+          _context2.next = 27;
           break;
 
         case 9:
-          _context.prev = 9;
+          _context2.prev = 9;
           userName = $inputGithub.value;
-          _context.next = 13;
+          _context2.next = 13;
           return regeneratorRuntime.awrap(axios.get("https://api.github.com/users/".concat(userName, "/events")));
 
         case 13:
-          res = _context.sent;
+          res = _context2.sent;
           gitEvent = res.data;
           $countNowNumber.textContent = getEvent();
           $inputGithub.classList.add('input-github-sucess');
@@ -13483,13 +13504,13 @@ $inputGithub.onkeyup = function _callee(_ref) {
             duration: 1000,
             delay: 16
           });
-          _context.next = 27;
+          _context2.next = 27;
           break;
 
         case 22:
-          _context.prev = 22;
-          _context.t0 = _context["catch"](9);
-          console.log(_context.t0);
+          _context2.prev = 22;
+          _context2.t0 = _context2["catch"](9);
+          console.log(_context2.t0);
           $inputGithub.classList.add('input-github-error');
           $inputGithub.placeholder = 'This is not a valid nickname.';
 
@@ -13498,7 +13519,7 @@ $inputGithub.onkeyup = function _callee(_ref) {
 
         case 28:
         case "end":
-          return _context.stop();
+          return _context2.stop();
       }
     }
   }, null, null, [[9, 22]]);
@@ -13529,23 +13550,23 @@ $btnClose.onclick = function () {
 };
 
 $refresh.onclick = function _callee2() {
-  return regeneratorRuntime.async(function _callee2$(_context2) {
+  return regeneratorRuntime.async(function _callee2$(_context3) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
           if (!(userName === '')) {
-            _context2.next = 2;
+            _context3.next = 2;
             break;
           }
 
-          return _context2.abrupt("return");
+          return _context3.abrupt("return");
 
         case 2:
           getGitHubCommit();
 
         case 3:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
     }
   });
@@ -13740,32 +13761,29 @@ var changeTodo = function changeTodo(id, content) {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.prev = 0;
-          console.log(content);
-          console.log('성공2');
-          _context4.next = 5;
+          _context4.next = 3;
           return regeneratorRuntime.awrap(axios.patch("/CommitTodos/modifiedTodos/".concat(id), {
             content: content
           }));
 
-        case 5:
+        case 3:
           res = _context4.sent;
-          console.log('성공3', res.data);
           todos = res.data;
           render();
-          _context4.next = 14;
+          _context4.next = 11;
           break;
 
-        case 11:
-          _context4.prev = 11;
+        case 8:
+          _context4.prev = 8;
           _context4.t0 = _context4["catch"](0);
           console.log(_context4.t0);
 
-        case 14:
+        case 11:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 11]]);
+  }, null, null, [[0, 8]]);
 };
 
 var modifyTodo = function modifyTodo(id) {
@@ -13774,13 +13792,11 @@ var modifyTodo = function modifyTodo(id) {
   $modifyTodoInput.value = $modifyTodoInput.previousElementSibling.innerText;
   $modifyTodoInput.previousElementSibling.innerText = '';
   $modifyTodoInput.focus();
-  console.log('TEST');
 
   $modifyTodoInput.onkeydown = function (_ref2) {
     var keyCode = _ref2.keyCode,
         target = _ref2.target;
 
-    // console.log('AAA', typeof keyCode, keyCode);
     if (keyCode === 13) {
       changeTodo(target.parentNode.id, $modifyTodoInput.value);
       $modifyTodoInput.style.display = 'none';

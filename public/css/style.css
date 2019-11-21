@@ -12,7 +12,9 @@ body {
   font-weight: 200;
   background-color: #eba33f;
   position: relative;
-  background-position-y: -200px; }
+  background-position-y: -200px;
+  background-image: url(../images/moominbg.jpg);
+}
 
 ul {
   padding-left: 0; }
@@ -24,7 +26,8 @@ li {
   width: 1200px;
   margin: 3vh auto;
   padding: 30px 80px;
-  background-color: rgba(241, 241, 241, 0.7); }
+  background-color: rgba(241, 241, 241, 0.7);
+}
 
 /* 헤더 */
 .header {
@@ -284,14 +287,18 @@ input[type='checkbox'] {
   -o-appearance: none;
   appearance: none;
   outline: none;
-  box-shadow: none; }
+  box-shadow: none;
+  background-image: url(../images/uncheck.png);
+}
 
 input[type='checkbox']:checked {
   -webkit-appearance: none;
   -moz-appearance: none;
   -o-appearance: none;
   appearance: none;
-  box-shadow: none; }
+  box-shadow: none;
+  background-image: url(../images/checked.png);
+}
 
 .btn {
   display: inline-block;
