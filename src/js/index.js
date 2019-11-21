@@ -13,8 +13,8 @@ let gitEvent = [];
 // eslint-disable-next-line no-unused-vars
 let typed = new Typed('.carrot-stick', {
   strings: ['Welcome!', 'Enter your GITHUB Nickname!'],
-  typeSpeed: 80,
-  backSpeed: 80,
+  typeSpeed: 50,
+  backSpeed: 30,
   cursorChar: ' '
 });
 
@@ -52,8 +52,8 @@ const changeFace = () => {
     $angryMark[1].style.display = 'block';
     typed = new Typed('.carrot-stick', {
       strings: ['Oh my god..', 'What are you doing?'],
-      typeSpeed: 80,
-      backSpeed: 50,
+      typeSpeed: 50,
+      backSpeed: 30,
       cursorChar: ' '
     });
   } else if (currentGitNumber >= goalGitNumber / 2 && currentGitNumber < goalGitNumber) {
@@ -66,8 +66,8 @@ const changeFace = () => {
     $normalEye.style.display = 'block';
     typed = new Typed('.carrot-stick', {
       strings: ['Cheer up!', 'Please keep up the good work.'],
-      typeSpeed: 80,
-      backSpeed: 50,
+      typeSpeed: 50,
+      backSpeed: 30,
       cursorChar: ' '
     });
   } else if (currentGitNumber >= goalGitNumber) {
@@ -80,8 +80,8 @@ const changeFace = () => {
     $happyHearts.style.display = 'block';
     typed = new Typed('.carrot-stick', {
       strings: ['Good job!', 'You are the best!'],
-      typeSpeed: 80,
-      backSpeed: 50,
+      typeSpeed: 50,
+      backSpeed: 30,
       cursorChar: ' '
     });
   }
@@ -126,8 +126,10 @@ const saveForcommit = () => {
 const getEvent = () => {
   let todayCommitCount = 0;
   let date = '';
-
-  $commitTime.innerHTML = `${new Date().getHours()}시 ${new Date().getMinutes()}분`;
+  const second = new Date().getSeconds() < 10 ? `0${new Date().getSeconds()}` : new Date().getSeconds();
+  const minute = new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : new Date().getMinutes();
+  const hour = new Date().getHours() < 10 ? `0${new Date().getHours()}` : new Date().getHours();
+  $commitTime.innerHTML = `${hour}:${minute}:${second} 기준`;
 
   gitEvent.forEach(eventList => {
     date = new Date(eventList.created_at).toDateString();
@@ -143,21 +145,14 @@ const getGitHubCommit = async () => {
     const res = await axios.get(`https://api.github.com/users/${userName}/events`);
     gitEvent = res.data;
     $countNowNumber.textContent = getEvent();
-
-    counterUp($countNowNumber, {
-      duration: 1000,
-      delay: 16
-    });
+    changeFace();
   } catch (error) {
     console.log(error);
   }
 };
 
-// Events``
-$inputGithub.onkeyup = async ({ keyCode }) => {
+const checkNickName = async () => {
   const regexp = /^([A-Za-z0-9-]){4,39}$/;
-
-  if (keyCode !== 13) return;
   if ($inputGithub.value === '' || !regexp.test($inputGithub.value)) {
     $inputGithub.classList.add('input-github-error');
     $inputGithub.placeholder = 'Please enter your Nickname. (using only 4-39 characters in English or -)';
@@ -170,11 +165,6 @@ $inputGithub.onkeyup = async ({ keyCode }) => {
       $inputGithub.classList.add('input-github-sucess');
       $inputGithub.placeholder = 'Thank you for using.';
       openPopup();
-
-      counterUp($countNowNumber, {
-        duration: 1000,
-        delay: 16
-      });
     } catch (error) {
       console.log(error);
       $inputGithub.classList.add('input-github-error');
@@ -182,6 +172,12 @@ $inputGithub.onkeyup = async ({ keyCode }) => {
     }
   }
   $inputGithub.value = '';
+};
+
+// Events``
+$inputGithub.onkeyup = async ({ keyCode }) => {
+  if (keyCode !== 13) return;
+  checkNickName();
 };
 
 $btnOk.onclick = () => {

@@ -13,8 +13,7 @@ body {
   background-color: #eba33f;
   position: relative;
   background-position-y: -200px;
-  background-image: url(../images/moominbg.jpg);
-}
+  background-image: url(../images/moominbg.png);}
 
 ul {
   padding-left: 0; }
@@ -27,7 +26,7 @@ li {
   margin: 3vh auto;
   padding: 30px 80px;
   background-color: rgba(241, 241, 241, 0.7);
-}
+  border-radius: 15px; }
 
 /* 헤더 */
 .header {
@@ -171,26 +170,12 @@ li {
   top: 50px;
   cursor: pointer; }
 
-.achieve::before {
-  content: "/";
-  display: inline-block;
-  width: 3px;
-  padding-right: 10px; }
-
 .count-number {
   font-size: 50px;
   text-align: right;
   margin-top: 20px;
   color: #313131;
   font-family: 'Source Code Pro', monospace; }
-
-.count-goal-number::before {
-  content: "/";
-  display: inline-block;
-  width: 3px;
-  padding-right: 30px;
-  color: #313131;
-  font-weight: 600; }
 
 /* 투두리스트 */
 .todolist {
@@ -288,8 +273,7 @@ input[type='checkbox'] {
   appearance: none;
   outline: none;
   box-shadow: none;
-  background-image: url(../images/uncheck.png);
-}
+  background-image: url(../images/uncheck.png);}
 
 input[type='checkbox']:checked {
   -webkit-appearance: none;
@@ -297,8 +281,7 @@ input[type='checkbox']:checked {
   -o-appearance: none;
   appearance: none;
   box-shadow: none;
-  background-image: url(../images/checked.png);
-}
+  background-image: url(../images/checked.png);}
 
 .btn {
   display: inline-block;

@@ -13302,8 +13302,8 @@ var gitEvent = []; // eslint-disable-next-line no-unused-vars
 
 var typed = new Typed('.carrot-stick', {
   strings: ['Welcome!', 'Enter your GITHUB Nickname!'],
-  typeSpeed: 80,
-  backSpeed: 80,
+  typeSpeed: 50,
+  backSpeed: 30,
   cursorChar: ' '
 }); // DOMs
 
@@ -13340,8 +13340,8 @@ var changeFace = function changeFace() {
     $angryMark[1].style.display = 'block';
     typed = new Typed('.carrot-stick', {
       strings: ['Oh my god..', 'What are you doing?'],
-      typeSpeed: 80,
-      backSpeed: 50,
+      typeSpeed: 50,
+      backSpeed: 30,
       cursorChar: ' '
     });
   } else if (currentGitNumber >= goalGitNumber / 2 && currentGitNumber < goalGitNumber) {
@@ -13354,8 +13354,8 @@ var changeFace = function changeFace() {
     $normalEye.style.display = 'block';
     typed = new Typed('.carrot-stick', {
       strings: ['Cheer up!', 'Please keep up the good work.'],
-      typeSpeed: 80,
-      backSpeed: 50,
+      typeSpeed: 50,
+      backSpeed: 30,
       cursorChar: ' '
     });
   } else if (currentGitNumber >= goalGitNumber) {
@@ -13368,8 +13368,8 @@ var changeFace = function changeFace() {
     $happyHearts.style.display = 'block';
     typed = new Typed('.carrot-stick', {
       strings: ['Good job!', 'You are the best!'],
-      typeSpeed: 80,
-      backSpeed: 50,
+      typeSpeed: 50,
+      backSpeed: 30,
       cursorChar: ' '
     });
   }
@@ -13415,7 +13415,10 @@ var saveForcommit = function saveForcommit() {
 var getEvent = function getEvent() {
   var todayCommitCount = 0;
   var date = '';
-  $commitTime.innerHTML = "".concat(new Date().getHours(), "\uC2DC ").concat(new Date().getMinutes(), "\uBD84");
+  var second = new Date().getSeconds() < 10 ? "0".concat(new Date().getSeconds()) : new Date().getSeconds();
+  var minute = new Date().getMinutes() < 10 ? "0".concat(new Date().getMinutes()) : new Date().getMinutes();
+  var hour = new Date().getHours() < 10 ? "0".concat(new Date().getHours()) : new Date().getHours();
+  $commitTime.innerHTML = "".concat(hour, ":").concat(minute, ":").concat(second, " \uAE30\uC900");
   gitEvent.forEach(function (eventList) {
     date = new Date(eventList.created_at).toDateString();
     if (date !== new Date().toDateString()) return;
@@ -13439,10 +13442,7 @@ var getGitHubCommit = function getGitHubCommit() {
           res = _context.sent;
           gitEvent = res.data;
           $countNowNumber.textContent = getEvent();
-          counterup2__WEBPACK_IMPORTED_MODULE_0___default()($countNowNumber, {
-            duration: 1000,
-            delay: 16
-          });
+          changeFace();
           _context.next = 12;
           break;
 
@@ -13457,72 +13457,85 @@ var getGitHubCommit = function getGitHubCommit() {
       }
     }
   }, null, null, [[0, 9]]);
-}; // Events``
+};
 
-
-$inputGithub.onkeyup = function _callee(_ref) {
-  var keyCode, regexp, res;
-  return regeneratorRuntime.async(function _callee$(_context2) {
+var checkNickName = function checkNickName() {
+  var regexp, res;
+  return regeneratorRuntime.async(function checkNickName$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          keyCode = _ref.keyCode;
           regexp = /^([A-Za-z0-9-]){4,39}$/;
 
-          if (!(keyCode !== 13)) {
-            _context2.next = 4;
-            break;
-          }
-
-          return _context2.abrupt("return");
-
-        case 4:
           if (!($inputGithub.value === '' || !regexp.test($inputGithub.value))) {
-            _context2.next = 9;
+            _context2.next = 6;
             break;
           }
 
           $inputGithub.classList.add('input-github-error');
           $inputGithub.placeholder = 'Please enter your Nickname. (using only 4-39 characters in English or -)';
-          _context2.next = 27;
+          _context2.next = 23;
           break;
 
-        case 9:
-          _context2.prev = 9;
+        case 6:
+          _context2.prev = 6;
           userName = $inputGithub.value;
-          _context2.next = 13;
+          _context2.next = 10;
           return regeneratorRuntime.awrap(axios.get("https://api.github.com/users/".concat(userName, "/events")));
 
-        case 13:
+        case 10:
           res = _context2.sent;
           gitEvent = res.data;
           $countNowNumber.textContent = getEvent();
           $inputGithub.classList.add('input-github-sucess');
           $inputGithub.placeholder = 'Thank you for using.';
           openPopup();
-          counterup2__WEBPACK_IMPORTED_MODULE_0___default()($countNowNumber, {
-            duration: 1000,
-            delay: 16
-          });
-          _context2.next = 27;
+          _context2.next = 23;
           break;
 
-        case 22:
-          _context2.prev = 22;
-          _context2.t0 = _context2["catch"](9);
+        case 18:
+          _context2.prev = 18;
+          _context2.t0 = _context2["catch"](6);
           console.log(_context2.t0);
           $inputGithub.classList.add('input-github-error');
           $inputGithub.placeholder = 'This is not a valid nickname.';
 
-        case 27:
+        case 23:
           $inputGithub.value = '';
 
-        case 28:
+        case 24:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[9, 22]]);
+  }, null, null, [[6, 18]]);
+}; // Events``
+
+
+$inputGithub.onkeyup = function _callee(_ref) {
+  var keyCode;
+  return regeneratorRuntime.async(function _callee$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          keyCode = _ref.keyCode;
+
+          if (!(keyCode !== 13)) {
+            _context3.next = 3;
+            break;
+          }
+
+          return _context3.abrupt("return");
+
+        case 3:
+          checkNickName();
+
+        case 4:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  });
 };
 
 $btnOk.onclick = function () {
@@ -13550,23 +13563,23 @@ $btnClose.onclick = function () {
 };
 
 $refresh.onclick = function _callee2() {
-  return regeneratorRuntime.async(function _callee2$(_context3) {
+  return regeneratorRuntime.async(function _callee2$(_context4) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
           if (!(userName === '')) {
-            _context3.next = 2;
+            _context4.next = 2;
             break;
           }
 
-          return _context3.abrupt("return");
+          return _context4.abrupt("return");
 
         case 2:
           getGitHubCommit();
 
         case 3:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
     }
   });
@@ -13965,16 +13978,7 @@ $nav.onclick = function (_ref7) {
 $todos.onscroll = function (_ref8) {
   var target = _ref8.target;
   scrollIconStop(target.scrollTop);
-}; // $btnOk.onclick = () => {
-//   console.log('todoList Event');
-//   getTodos();
-// };
-// $inputCommit.onkeyup = ({ keyCode }) => {
-//   if (keyCode !== 13) return;
-//   console.log('todoList Event');
-//   getTodos();
-// };
-
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (getTodos);
 

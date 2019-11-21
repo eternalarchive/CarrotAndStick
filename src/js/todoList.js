@@ -208,16 +208,4 @@ $todos.onscroll = ({ target }) => {
   scrollIconStop(target.scrollTop);
 };
 
-
-// $btnOk.onclick = () => {
-//   console.log('todoList Event');
-//   getTodos();
-// };
-
-// $inputCommit.onkeyup = ({ keyCode }) => {
-//   if (keyCode !== 13) return;
-//   console.log('todoList Event');
-//   getTodos();
-// };
-
 export default getTodos;
