@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import url('https://use.fontawesome.com/releases/v5.5.0/css/all.css');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
 
 *, *::before, *::after{
   box-sizing: border-box;
@@ -207,6 +208,7 @@ li{
   text-align: right;
   margin-top: 20px;
   color: #313131;
+  font-family: 'Source Code Pro', monospace;
 }
 
 .count-goal-number::before{
