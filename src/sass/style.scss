@@ -851,3 +851,22 @@ input[type='checkbox']:checked{
     stroke-dashoffset: 0;
   }
 }
+.warning-text {
+  overflow: hidden;
+  animation: warningMent 3s;
+}
+
+@keyframes warningMent {
+  0% {
+    transform: scale(1.2);
+    color: #313131;
+  }
+  33% {
+    transform: scale(1.7);
+    color: red;
+  }
+  100% {
+    transform: scale(1.2);
+    color: #313131;
+  }
+}
