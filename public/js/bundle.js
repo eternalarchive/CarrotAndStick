@@ -13423,64 +13423,85 @@ var getEvent = function getEvent() {
   });
   return todayCommitCount;
 }; // git API 불러오기.
+// const getGitHubCommit = async () => {
+//   try {
+//     const res = await axios.get(`https://api.github.com/users/${userName}/events`);
+//     gitEvent = res.data;
+//     $countNowNumber.textContent = getEvent();
+//     counterUp($countNowNumber, {
+//       duration: 1000,
+//       delay: 16
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+// Events``
 
 
-var getGitHubCommit = function getGitHubCommit() {
-  var res;
-  return regeneratorRuntime.async(function getGitHubCommit$(_context) {
+$inputGithub.onkeyup = function _callee(_ref) {
+  var keyCode, regexp, res;
+  return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
-          _context.next = 3;
-          return regeneratorRuntime.awrap(axios.get("https://api.github.com/users/".concat(userName, "/events")));
+          keyCode = _ref.keyCode;
+          regexp = /^([A-Za-z0-9-]){4,39}$/;
 
-        case 3:
-          res = _context.sent;
-          gitEvent = res.data;
-          $countNowNumber.textContent = getEvent();
-          counterup2__WEBPACK_IMPORTED_MODULE_0___default()($countNowNumber, {
-            duration: 1000,
-            delay: 16
-          });
-          _context.next = 12;
+          if (!(keyCode !== 13)) {
+            _context.next = 4;
+            break;
+          }
+
+          return _context.abrupt("return");
+
+        case 4:
+          if (!($inputGithub.value === '' || !regexp.test($inputGithub.value))) {
+            _context.next = 9;
+            break;
+          }
+
+          $inputGithub.classList.add('input-github-error');
+          $inputGithub.placeholder = 'Please enter your Nickname. (using only 4-39 characters in English or -)';
+          _context.next = 27;
           break;
 
         case 9:
           _context.prev = 9;
-          _context.t0 = _context["catch"](0);
-          console.log(_context.t0);
+          userName = $inputGithub.value;
+          _context.next = 13;
+          return regeneratorRuntime.awrap(axios.get("https://api.github.com/users/".concat(userName, "/events")));
 
-        case 12:
+        case 13:
+          res = _context.sent;
+          gitEvent = res.data;
+          $countNowNumber.textContent = getEvent();
+          $inputGithub.classList.add('input-github-sucess');
+          $inputGithub.placeholder = 'Thank you for using.';
+          openPopup();
+          counterup2__WEBPACK_IMPORTED_MODULE_0___default()($countNowNumber, {
+            duration: 1000,
+            delay: 16
+          });
+          _context.next = 27;
+          break;
+
+        case 22:
+          _context.prev = 22;
+          _context.t0 = _context["catch"](9);
+          console.log(_context.t0);
+          $inputGithub.classList.add('input-github-error');
+          $inputGithub.placeholder = 'This is not a valid nickname.';
+
+        case 27:
+          $inputGithub.value = '';
+
+        case 28:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 9]]);
-}; // Events
-
-
-$inputGithub.onkeyup = function (_ref) {
-  var keyCode = _ref.keyCode;
-  var regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=_-])(?=.*[0-9]).{6,16}$/;
-  if (keyCode !== 13) return;
-
-  if ($inputGithub.value === '') {
-    $inputGithub.classList.add('input-github-error');
-    $inputGithub.placeholder = 'Please enter your Nickname.';
-  } else if (regExp.test($inputCommit.value)) {
-    $inputGithub.classList.add('input-github-error');
-    $inputGithub.placeholder = 'This is not a valid Nickname.';
-    $inputGithub.value = '';
-  } else {
-    $inputGithub.classList.add('input-github-sucess');
-    $inputGithub.placeholder = 'Thank you for using.';
-    userName = $inputGithub.value;
-    getGitHubCommit();
-    openPopup();
-  }
-
-  $inputGithub.value = '';
+  }, null, null, [[9, 22]]);
 };
 
 $btnOk.onclick = function () {
@@ -13507,8 +13528,8 @@ $btnClose.onclick = function () {
   closePopup();
 };
 
-$refresh.onclick = function _callee() {
-  return regeneratorRuntime.async(function _callee$(_context2) {
+$refresh.onclick = function _callee2() {
+  return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
