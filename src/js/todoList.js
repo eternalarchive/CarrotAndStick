@@ -34,6 +34,8 @@ const render = () => {
       <li id="${id}" class="todo-item">
         <input class="checkbox" type="checkbox" id="ck-${id}" ${completed ? 'checked' : ''}>
         <label for="ck-${id}">${content}</label>
+        <input id="modify-${id}" class="modify-todo-input" type="text" style="display: none;">
+        <i class="modify-todo fas fa-edit"></i>
         <i class="remove-todo far fa-trash-alt"></i>
       </li>`;
     });
@@ -90,6 +92,30 @@ const removeTodo = async id => {
   } catch (error) {
     console.log(error);
   }
+};
+
+const changeTodo = async (id, content) => {
+  try {
+    const res = await axios.patch(`/CommitTodos/modifiedTodos/${id}`, { content });
+    todos = res.data;
+    render();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const modifyTodo = id => {
+  const $modifyTodoInput = document.querySelector(`#modify-${id}`);
+  $modifyTodoInput.style.display = 'block';
+  $modifyTodoInput.value = $modifyTodoInput.previousElementSibling.innerText;
+  $modifyTodoInput.previousElementSibling.innerText = '';
+  $modifyTodoInput.focus();
+  $modifyTodoInput.onkeydown = ({ keyCode, target }) => {
+    if (keyCode === 13) {
+      changeTodo(target.parentNode.id, $modifyTodoInput.value);
+      $modifyTodoInput.style.display = 'none';
+    }
+  };
 };
 
 const toggleTodo = async id => {
@@ -152,14 +178,13 @@ window.onload = () => {
 
 $inputTodo.onkeyup = ({ target, keyCode }) => {
   if (keyCode !== 13 || target.value.trim() === '') return;
-  if (!userName) {
-    warningText();
-  } else addTodos();
+  if (!userName) warningText();
+  else addTodos();
 };
 
 $todos.onclick = ({ target }) => {
-  if (!target.classList.contains('remove-todo')) return;
-  removeTodo(target.parentNode.id);
+  if (target.classList.contains('remove-todo')) removeTodo(target.parentNode.id);
+  if (target.classList.contains('modify-todo')) modifyTodo(target.parentNode.id);
 };
 
 $todos.onchange = ({ target }) => {

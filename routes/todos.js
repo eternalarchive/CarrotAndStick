@@ -49,4 +49,12 @@ router.delete('/completedTodos', (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
+// Update by content
+router.patch('/modifiedTodos/:id([0-9]+)', (req, res) => {
+  Todo.updateByTodoid(req.params.id, req.body)
+    .then(() => Todo.findAll())
+    .then(todos => res.send(todos))
+    .catch(err => res.status(500).send(err));
+});
+
 module.exports = router;

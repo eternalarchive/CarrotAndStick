@@ -13584,7 +13584,7 @@ var render = function render() {
       var id = _ref.id,
           content = _ref.content,
           completed = _ref.completed;
-      html += "\n      <li id=\"".concat(id, "\" class=\"todo-item\">\n        <input class=\"checkbox\" type=\"checkbox\" id=\"ck-").concat(id, "\" ").concat(completed ? 'checked' : '', ">\n        <label for=\"ck-").concat(id, "\">").concat(content, "</label>\n        <i class=\"remove-todo far fa-trash-alt\"></i>\n      </li>");
+      html += "\n      <li id=\"".concat(id, "\" class=\"todo-item\">\n        <input class=\"checkbox\" type=\"checkbox\" id=\"ck-").concat(id, "\" ").concat(completed ? 'checked' : '', ">\n        <label for=\"ck-").concat(id, "\">").concat(content, "</label>\n        <input id=\"modify-").concat(id, "\" class=\"modify-todo-input\" type=\"text\" style=\"display: none;\">\n        <i class=\"modify-todo fas fa-edit\"></i>\n        <i class=\"remove-todo far fa-trash-alt\"></i>\n      </li>");
     });
 
     $completedTodos.textContent = todos.filter(function (todo) {
@@ -13712,36 +13712,91 @@ var removeTodo = function removeTodo(id) {
   }, null, null, [[0, 8]]);
 };
 
-var toggleTodo = function toggleTodo(id) {
-  var completed, res;
-  return regeneratorRuntime.async(function toggleTodo$(_context4) {
+var changeTodo = function changeTodo(id, content) {
+  var res;
+  return regeneratorRuntime.async(function changeTodo$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.prev = 0;
+          console.log(content);
+          console.log('성공2');
+          _context4.next = 5;
+          return regeneratorRuntime.awrap(axios.patch("/CommitTodos/modifiedTodos/".concat(id), {
+            content: content
+          }));
+
+        case 5:
+          res = _context4.sent;
+          console.log('성공3', res.data);
+          todos = res.data;
+          render();
+          _context4.next = 14;
+          break;
+
+        case 11:
+          _context4.prev = 11;
+          _context4.t0 = _context4["catch"](0);
+          console.log(_context4.t0);
+
+        case 14:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, null, null, [[0, 11]]);
+};
+
+var modifyTodo = function modifyTodo(id) {
+  var $modifyTodoInput = document.querySelector("#modify-".concat(id));
+  $modifyTodoInput.style.display = 'block';
+  $modifyTodoInput.value = $modifyTodoInput.previousElementSibling.innerText;
+  $modifyTodoInput.previousElementSibling.innerText = '';
+  $modifyTodoInput.focus();
+  console.log('TEST');
+
+  $modifyTodoInput.onkeydown = function (_ref2) {
+    var keyCode = _ref2.keyCode,
+        target = _ref2.target;
+
+    // console.log('AAA', typeof keyCode, keyCode);
+    if (keyCode === 13) {
+      changeTodo(target.parentNode.id, $modifyTodoInput.value);
+      $modifyTodoInput.style.display = 'none';
+    }
+  };
+};
+
+var toggleTodo = function toggleTodo(id) {
+  var completed, res;
+  return regeneratorRuntime.async(function toggleTodo$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
           completed = !todos.find(function (todo) {
             return todo.id === +id;
           }).completed;
-          _context4.next = 4;
+          _context5.next = 4;
           return regeneratorRuntime.awrap(axios.patch("/CommitTodos/".concat(id), {
             completed: completed
           }));
 
         case 4:
-          res = _context4.sent;
+          res = _context5.sent;
           todos = res.data;
           render();
-          _context4.next = 12;
+          _context5.next = 12;
           break;
 
         case 9:
-          _context4.prev = 9;
-          _context4.t0 = _context4["catch"](0);
-          console.log(_context4.t0);
+          _context5.prev = 9;
+          _context5.t0 = _context5["catch"](0);
+          console.log(_context5.t0);
 
         case 12:
         case "end":
-          return _context4.stop();
+          return _context5.stop();
       }
     }
   }, null, null, [[0, 9]]);
@@ -13749,45 +13804,15 @@ var toggleTodo = function toggleTodo(id) {
 
 var toggleAll = function toggleAll(completed) {
   var res;
-  return regeneratorRuntime.async(function toggleAll$(_context5) {
-    while (1) {
-      switch (_context5.prev = _context5.next) {
-        case 0:
-          _context5.prev = 0;
-          _context5.next = 3;
-          return regeneratorRuntime.awrap(axios.patch('/CommitTodos', {
-            completed: completed
-          }));
-
-        case 3:
-          res = _context5.sent;
-          todos = res.data;
-          render();
-          _context5.next = 11;
-          break;
-
-        case 8:
-          _context5.prev = 8;
-          _context5.t0 = _context5["catch"](0);
-          console.error(_context5.t0);
-
-        case 11:
-        case "end":
-          return _context5.stop();
-      }
-    }
-  }, null, null, [[0, 8]]);
-};
-
-var clearTodos = function clearTodos() {
-  var res;
-  return regeneratorRuntime.async(function clearTodos$(_context6) {
+  return regeneratorRuntime.async(function toggleAll$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
           _context6.prev = 0;
           _context6.next = 3;
-          return regeneratorRuntime.awrap(axios["delete"]('/CommitTodos/completedTodos'));
+          return regeneratorRuntime.awrap(axios.patch('/CommitTodos', {
+            completed: completed
+          }));
 
         case 3:
           res = _context6.sent;
@@ -13804,6 +13829,36 @@ var clearTodos = function clearTodos() {
         case 11:
         case "end":
           return _context6.stop();
+      }
+    }
+  }, null, null, [[0, 8]]);
+};
+
+var clearTodos = function clearTodos() {
+  var res;
+  return regeneratorRuntime.async(function clearTodos$(_context7) {
+    while (1) {
+      switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.prev = 0;
+          _context7.next = 3;
+          return regeneratorRuntime.awrap(axios["delete"]('/CommitTodos/completedTodos'));
+
+        case 3:
+          res = _context7.sent;
+          todos = res.data;
+          render();
+          _context7.next = 11;
+          break;
+
+        case 8:
+          _context7.prev = 8;
+          _context7.t0 = _context7["catch"](0);
+          console.error(_context7.t0);
+
+        case 11:
+        case "end":
+          return _context7.stop();
       }
     }
   }, null, null, [[0, 8]]);
@@ -13837,29 +13892,26 @@ window.onload = function () {
   getTodos();
 };
 
-$inputTodo.onkeyup = function (_ref2) {
-  var target = _ref2.target,
-      keyCode = _ref2.keyCode;
+$inputTodo.onkeyup = function (_ref3) {
+  var target = _ref3.target,
+      keyCode = _ref3.keyCode;
   if (keyCode !== 13 || target.value.trim() === '') return;
-
-  if (!_index__WEBPACK_IMPORTED_MODULE_0__["userName"]) {
-    warningText();
-  } else addTodos();
+  if (!_index__WEBPACK_IMPORTED_MODULE_0__["userName"]) warningText();else addTodos();
 };
 
-$todos.onclick = function (_ref3) {
-  var target = _ref3.target;
-  if (!target.classList.contains('remove-todo')) return;
-  removeTodo(target.parentNode.id);
-};
-
-$todos.onchange = function (_ref4) {
+$todos.onclick = function (_ref4) {
   var target = _ref4.target;
+  if (target.classList.contains('remove-todo')) removeTodo(target.parentNode.id);
+  if (target.classList.contains('modify-todo')) modifyTodo(target.parentNode.id);
+};
+
+$todos.onchange = function (_ref5) {
+  var target = _ref5.target;
   toggleTodo(target.parentNode.id);
 };
 
-$completeAll.onchange = function (_ref5) {
-  var target = _ref5.target;
+$completeAll.onchange = function (_ref6) {
+  var target = _ref6.target;
   toggleAll(target.checked);
 };
 
@@ -13867,14 +13919,14 @@ $clearCompleted.onclick = function () {
   clearTodos();
 };
 
-$nav.onclick = function (_ref6) {
-  var target = _ref6.target;
+$nav.onclick = function (_ref7) {
+  var target = _ref7.target;
   if (target.classList.contains('nav')) return;
   changeNav(target);
 };
 
-$todos.onscroll = function (_ref7) {
-  var target = _ref7.target;
+$todos.onscroll = function (_ref8) {
+  var target = _ref8.target;
   scrollIconStop(target.scrollTop);
 }; // $btnOk.onclick = () => {
 //   console.log('todoList Event');

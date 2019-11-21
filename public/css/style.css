@@ -238,11 +238,23 @@ li {
   justify-content: space-between;
   align-items: center; }
 
-.remove-todo {
+.remove-todo, .modify-todo {
+  margin-left: 5px;
   cursor: pointer; }
 
-.remove-todo:hover {
+.remove-todo:hover, .modify-todo:hover {
   color: red; }
+
+.modify-todo-input {
+  position: absolute;
+  left: 8%;
+  width: 400px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 15px;
+  color: #313131;
+  font-weight: 200; }
 
 .scroll-icon {
   width: 20px;
