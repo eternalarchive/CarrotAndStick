@@ -13935,6 +13935,7 @@ var warningText = function warningText() {
     $emptyMent.classList.remove('warning-text');
     $todos.style.overflow = null;
   }, 3002);
+  $inputTodo.value = '';
 }; // 이벤트
 
 
@@ -13957,6 +13958,7 @@ $todos.onclick = function (_ref4) {
 
 $todos.onchange = function (_ref5) {
   var target = _ref5.target;
+  if (!target.classList.contains('checkbox')) return;
   toggleTodo(target.parentNode.id);
 };
 
