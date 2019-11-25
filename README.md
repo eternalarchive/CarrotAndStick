@@ -44,7 +44,7 @@ Git Commit 수에 따른 캐릭터 표정 변화 어플리케이션 입니다. �
 
 ### 5. 구현 기술
 
-<img src="https://user-images.githubusercontent.com/31315644/69507670-a78fd400-0f76-11ea-8239-0dfcdd79e4be.png" alt="stack" style="zoom:50%;" />
+<img src="https://user-images.githubusercontent.com/31315644/69511508-b9c43f00-0f83-11ea-89bf-1889e46b1555.png" alt="Stack" style="zoom:50%;" />
 
 <br/>
 
@@ -56,7 +56,7 @@ Git Commit 수에 따른 캐릭터 표정 변화 어플리케이션 입니다. �
 
 ### 7.  Mark Up 
 
-![domtree](https://user-images.githubusercontent.com/31315644/69507652-9fd02f80-0f76-11ea-9052-66e16187e1aa.png)
+![DomTree](https://user-images.githubusercontent.com/31315644/69511505-b9c43f00-0f83-11ea-86ce-cb4d61ede45b.png)
 
 <br/>
 
@@ -108,6 +108,6 @@ Git Commit 수에 따른 캐릭터 표정 변화 어플리케이션 입니다. �
 
 <br/>
 
-![Project_기여도](https://user-images.githubusercontent.com/31315644/69510912-f3944600-0f81-11ea-9488-3042cd15bdb2.png)
+![Contribution](https://user-images.githubusercontent.com/31315644/69511504-b92ba880-0f83-11ea-9efe-2d940ec23a4d.png)
 
 <img src="https://user-images.githubusercontent.com/31315644/69507667-a5c61080-0f76-11ea-8db0-a91485c8417f.png" style="zoom:50%;" />
