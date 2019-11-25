@@ -39,6 +39,8 @@ Git Commit 수에 따른 캐릭터 표정 변화 어플리케이션 입니다. �
 - GitHub API 로드 및 가공
 - 캐릭터 및 로고 렌더링 ( SVG 활용 )
 - todo list 기능을 이용한 닉네임별로 관리되는 Git Daily Planner 개발
+- Git flow를 사용하여 협업을 할 것. 
+- Git 컨벤션을 최대한 지킬 것
 
 <br/>
 
@@ -108,6 +110,10 @@ Git Commit 수에 따른 캐릭터 표정 변화 어플리케이션 입니다. �
 
 <br/>
 
+------------
+
 ![Contribution](https://user-images.githubusercontent.com/31315644/69511504-b92ba880-0f83-11ea-9efe-2d940ec23a4d.png)
+
+----------------------------
 
 <img src="https://user-images.githubusercontent.com/31315644/69507667-a5c61080-0f76-11ea-8db0-a91485c8417f.png" style="zoom:50%;" />
