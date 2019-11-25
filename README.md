@@ -50,7 +50,7 @@ Git Commit 수에 따른 캐릭터 표정 변화 어플리케이션 입니다. �
 
 ### 6.  MVP Flow Chart
 
-![flowchart](https://user-images.githubusercontent.com/31315644/69507662-a3fc4d00-0f76-11ea-9373-442c6685ee01.png)
+![Flowchart](https://user-images.githubusercontent.com/31315644/69511730-ba110a00-0f84-11ea-8851-1c021e760493.png)
 
 <br/>
 
