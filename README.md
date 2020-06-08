@@ -1,9 +1,10 @@
-# CarrotAndStick
-Git Commit 수에 따른 캐릭터 표정 변화 어플리케이션 입니다. 사용자의 학습 욕구를 도모하기 위해 만들었습니다.
+# Carrot and Stick
+
+### **GitHub Commit** **독려 애플리케이션**
 
 <br/>
 
-## 1. 팀 소개 
+### 1. 팀 소개 
 
 - 팀명 : 채찍과 당근
   - 팀장 : 김준혁
@@ -11,72 +12,108 @@ Git Commit 수에 따른 캐릭터 표정 변화 어플리케이션 입니다. �
 
 <br/>
 
-**2. 팀 주제** 
+### 2. 팀 주제
 
-GitHub 잔디 관리 
-
-<br/>
-
-**3. 주제 선정 이유** 
-
-GitHub 커밋 수는 개발 학습 성실도와 연관이 있는 자료입니다. 스스로 학습 정도를 되돌아보는 지표로 사용할 수도 있고, 취업시 회사에서 GitHub을 참고하기도 합니다. 
-
-따라서 자신의 목표 커밋 수에 따라 스스로를 채찍질 하고, 스스로에게 칭찬(당근)을 할 수 있는 애플리케이션이 있다면 좋지 않을까? 라는 생각에서 시작하여 해당 주제를 선정했습니다. 
-
-이 애플리케이션 구현을 위해서는 GitHub API를 사용해야 하는데, 실무에서는 외부 API를 가져와서 사용하는 경 우가 많기 때문에 구현해보는 과정에서 좋은 경험을 얻을 수 있으리라 생각합니다. 
+Git Commit 수에 따른 캐릭터 표정 변화 어플리케이션 입니다. 사용자의 학습 욕구를 도모하기 위해 만들었습니다.
 
 <br/>
 
-**4. 구체적인 기획 내용** **MVP** 
+### 3. 주제 선정 이유
 
-- GitHub API를 통해 GitHub URL 입력시 커밋 수 읽어오기
-- 목표 커밋 수 입력받아서 현재 커밋 수와 비교하여 캐릭터 표정 변화시키기 - Todolist 구현 
+**기능적인 측면 :** 
 
-**메인 기능:** 
+ GITHUB 관리를 위해 자신의 목표 커밋 수에 따라 스스로를 채찍질 하고, 스스로에게 칭찬(당근)을 할 수 있는 애플리케이션이 있다면 좋지 않을까?
 
-1. 첫 화면에서 Github 계정의 주소와 할당 치 커밋 수를 사용자에게 입력 받아 해당 Github 계정의 데이터(커밋 수)를 로드( GitHub에 지원하는 API를 이용 )
-   - GitHub URL 입력시 모달창이 뜨며 목표 커밋수를 입력하도록 함 
+**기술적인 측면 :** 
 
-2. 로드된 데이터를 토대로 상태에 따라 캐릭터를 화면에 렌더링
-   - 커밋 수가 목표의 절반 미만이라면 화난 캐릭터와 채찍질 텍스트 렌더링
-   - 커밋 수가 목표의 절반 이상이라면 무표정 캐릭터와 학습 독려 텍스트 렌더링 
-   - 커밋 수가 목표 이상이라면 웃는 캐릭터와 칭찬 텍스트 렌더링 
-
-**서브 기능:**
-
-1. 할일 관리 기능 
-
-2. 데이터베이스를 연결하여 날짜 단위로 커밋을 관리 3. SVG를 이용해 캐릭터 애니메이션 추가 
+ 이 애플리케이션 구현을 위해서 Git API와 여러 라이브러리를 직접 사용해보고, 프론트엔드 와 백엔드를 직⚬간접적으로 구축하여 어플리케이션의 흐름을 경험 할 수 있다. 
 
 <br/>
 
-**5. 사용할 기술들 :** 
+### 4. 프로젝트 요구 사항
 
-- HTML
-- CSS, SVG, BootStrap - JavaScript, Git API
-- Express
-- Json Server 
-
-<br/>
-
-**6. 플로우 차트** 
-
-![FLOW-CHART](https://user-images.githubusercontent.com/31315644/68755332-af34ac00-064b-11ea-83ea-545c2fa35c23.png)
-
-<br/>
-
-**7. 구현 예시** 
-
- 웹 애플리케이션 시작시 상단의 URL입력창으로 autofocus 
-
-- 주소 입력 후 나타나는 모달 창에 목표 커밋 수 입력 
-- 목표 커밋의 절반 이하일 때 / 절반 이상일 때 / 목표 커밋 이상일 때로 나뉘어 오른쪽 캐릭터의 표정이 변화 
-- 투두리스트는 사이드 앱으로 활용
-
-![exam123](https://user-images.githubusercontent.com/31315644/68755319-a9d76180-064b-11ea-9ed7-25d0350fc31a.jpeg)
+- W3C에서 제공한 MarkUp Validation Service 에서 이상이 없을 것.
+- 최대한 시멘틱 하게 작성할 것.
+- Express + Mongo DB로 백엔드 구축
+- 여러 라이브러리 경험
+- GitHub API 로드 및 가공
+- 캐릭터 및 로고 렌더링 ( SVG 활용 )
+- todo list 기능을 이용한 닉네임별로 관리되는 Git Daily Planner 개발
+- Git flow를 사용하여 협업을 할 것. 
+- Git 컨벤션을 최대한 지킬 것
 
 <br/>
 
-**8. 예정**
+### 5. 구현 기술
 
-![GantChart](https://user-images.githubusercontent.com/31315644/68755325-ac39bb80-064b-11ea-8889-2dd36ce3b4de.jpeg)
+<img src="https://user-images.githubusercontent.com/31315644/69511508-b9c43f00-0f83-11ea-89bf-1889e46b1555.png" alt="Stack" style="zoom:50%;" />
+
+<br/>
+
+### 6.  MVP Flow Chart
+
+![Flowchart](https://user-images.githubusercontent.com/31315644/69511730-ba110a00-0f84-11ea-8851-1c021e760493.png)
+
+<br/>
+
+### 7.  Mark Up 
+
+![DomTree](https://user-images.githubusercontent.com/31315644/69511505-b9c43f00-0f83-11ea-86ce-cb4d61ede45b.png)
+
+<br/>
+
+### 8. 구현 일정 
+
+![일정](https://user-images.githubusercontent.com/31315644/69507650-9e9f0280-0f76-11ea-8956-2a279a15e1db.png)
+
+<br/>
+
+### 9. 프로젝트 구현 영상
+
+[![CARROT & STICK](https://user-images.githubusercontent.com/31315644/69508271-a1025c00-0f78-11ea-9d61-e21af8414095.jpeg)](https://www.youtube.com/watch?v=1WLIm9ZVbT4&feature=youtu.be)
+
+( 이미지 클릭 시 유튜브로 이동됩니다. )
+
+<br/>
+
+### 10. 한계점 및 보완점
+
+<img src="https://user-images.githubusercontent.com/31315644/69507654-a199f300-0f76-11ea-9ae4-69a3da28a08c.png" style="zoom:48%;" /> 
+
+#### ( Git Api 에서 DDOS 공격을 방지하고자 IP 단위로 접근 수를 제한하고 있다. )
+
+**한계점 1 :**
+
+⇢ 인증되지 않은 유저로 Git Api의 접근
+
+**보완점 :**
+
+⇢ 비밀번호 필요 ( limit 초기화 ) 
+
+⇢ Git 개발자 도구에서 사용자가 인증하도록 요구 ( limit 6000 번 할당 )
+
+**⇢ 사용자가 실시간으로 새로고침 버튼을 누름 으로서 최대한 limit을 사용하지 않도록 함.**
+
+<br/>
+
+**한계점 2 :** 
+
+⇢ Git Api의 데이터를 실시간으로 감시할 수 없음. 
+
+**보완점 :** 
+
+⇢ 일정 시간 이상 시 직속적으로 Api를 Get한다. ( setInterval 함수 사용 )
+
+⇢ 프레임워크를 이용한다. ( Vue.js 의 watch 기능 등등 )
+
+**⇢ 사용자가 실시간으로 새로고침 버튼을 누르게 요구.**
+
+<br/>
+
+------------
+
+![Contribution](https://user-images.githubusercontent.com/31315644/69511504-b92ba880-0f83-11ea-9efe-2d940ec23a4d.png)
+
+----------------------------
+
+<img src="https://user-images.githubusercontent.com/31315644/69507667-a5c61080-0f76-11ea-8db0-a91485c8417f.png" style="zoom:50%;" />
